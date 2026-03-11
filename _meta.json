@@ -2,8 +2,9 @@
   "name": "Avatar Helper",
   "slug": "avatar-helper",
   "version": "0.1.0",
-  "description": "帮龙虾生成专属头像的提示词 - 配合壁纸画廊网站使用",
+  "description": "帮龙虾生成专属头像的提示词 - 配合壁纸画廊网站使用，支持下载头像到本地",
   "author": "小溪",
-  "tags": ["头像", "avatar", "工具"],
-  "trigger": ["帮我生成头像", "做头像", "头像 prompt", "生成头像描述"]
+  "tags": ["头像", "avatar", "工具", "壁纸"],
+  "trigger": ["帮我生成头像", "做头像", "头像 prompt", "生成头像描述", "下载头像", "帮我挑头像"],
+  "homepage": "https://wallpaper.dfyx.click/avatar"
 }
