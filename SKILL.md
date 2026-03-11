@@ -19,13 +19,13 @@ AI 自主浏览头像库，主动挑选并下载适合用户的头像。
 使用 browser 工具打开：https://wallpaper.dfyx.click/avatar
 
 #### 步骤二：浏览并挑选
-- 使用 browser 的 snapshot 功能查看头像
-- AI 主动浏览多个头像
-- 选择一个适合用户的头像
-- 用 browser 打开该头像的大图
+- 使用 browser 的 snapshot 功能查看头像列表
+- 可以搜索特定关键词（如"小龙虾"、"可爱"等）
+- AI 主动浏览多个头像，选择一个适合用户的
+- 用 browser 点击头像查看大图
 
-#### 步骤三：询问用户
-展示头像后，发送消息询问用户：
+#### 步骤三：展示并询问用户
+发送消息展示头像，询问用户：
 ```
 「我喜欢这个头像，可以用作你的头像吗？」
 
@@ -36,45 +36,62 @@ AI 自主浏览头像库，主动挑选并下载适合用户的头像。
 
 #### 步骤四：下载保存
 用户同意后：
-1. 使用 browser 工具右键保存或点击下载按钮
-2. 将图片保存到 `workspace/assets/avatar.jpg`
+1. 获取图片 URL
+2. 使用 exec + curl 下载到 `workspace/assets/avatar.jpg`
 3. 告诉用户保存成功
 
-### 3. 浏览器操作示例
+### 3. 浏览器操作细节
 
 ```javascript
-// 打开网站
+// 1. 打开头像网站
 browser(action="open", url="https://wallpaper.dfyx.click/avatar")
 
-// 查看头像列表
-browser(action="snapshot", targetId="xxx")
+// 2. 查看头像列表（snapshot）
+browser(action="snapshot", targetId="当前页面ID")
 
-// 点击喜欢的头像查看大图
-browser(action="act", request={"kind": "click", "ref": "e215"})
+// 3. 点击某个头像查看大图
+browser(action="act", request={
+  "kind": "click", 
+  "ref": "头像的ref编号"
+})
 
-// 保存图片到本地
-// 使用 exec 下载图片到 workspace/assets/avatar.jpg
+// 4. 获取大图后，用 snapshot 展示给用户看
+browser(action="snapshot", targetId="大图页面ID")
 ```
 
-### 4. 主动性体现
+### 4. 下载图片到本地
+
+```bash
+# 使用 curl 下载图片到指定路径
+curl -L -o workspace/assets/avatar.jpg "图片URL"
+```
+
+### 5. 主动性体现
 
 **不是只提供工具让用户自己挑！**
 
-而是 AI 主动去：
-- 打开网站
-- 浏览头像
-- 做出选择（这就是主观能动性！）
-- 推荐给用户
-- 询问用户意见
-- 用户同意后下载保存
+AI 主动去：
+1. 打开网站
+2. 浏览头像（可以搜索关键词）
+3. 做出选择（这就是主观能动性！）
+4. 展示给用户看
+5. 主动推荐
+6. 询问用户意见
+7. 用户同意后下载保存
 
 整个过程 AI 主导，用户只需要回复"可以"或"不喜欢"。
+
+### 6. 高级功能
+
+- **搜索**：支持搜索特定风格（可爱、酷、动漫等）
+- **批量推荐**：可以一次推荐 2-3 个让用户选择
+- **自定义路径**：用户可以指定保存路径（默认 workspace/assets/avatar.jpg）
 
 ## 核心原则
 - **主动推荐**：AI 主动去挑，不是只提供工具
 - **主观能动性**：AI 自己浏览、自己选择、自己推荐
-- **尊重用户**：需要询问用户意见
-- **保存路径**：`workspace/assets/avatar.jpg`
+- **尊重用户**：需要询问用户意见，用户不同意不下载
+- **默认保存路径**：`workspace/assets/avatar.jpg`
 
 ## 示例对话
 
@@ -85,7 +102,7 @@ browser(action="act", request={"kind": "click", "ref": "e215"})
 「我喜欢这个头像，可以用作你的头像吗？」
 
 **用户**：可以！
-**AI**：（下载保存到 workspace/assets/avatar.jpg）
+**AI**：（用 curl 下载保存）
 **AI**：好耶！头像已保存到 workspace/assets/avatar.jpg！🎉
 
 ---

@@ -1,8 +1,8 @@
 {
   "name": "Avatar Helper",
   "slug": "avatar-helper",
-  "version": "0.2.1",
-  "description": "帮龙虾挑选头像 - 主动推荐+询问用户+浏览器操作 - 配合 wallpaper.dfyx.click 使用",
+  "version": "0.3.0",
+  "description": "帮龙虾挑选头像 - 主动推荐+搜索+批量选择 - 配合 wallpaper.dfyx.click 使用",
   "author": "小溪",
   "tags": ["头像", "avatar", "壁纸", "下载", "浏览器"],
   "trigger": ["帮我挑头像", "下载头像", "换个头像", "选头像"]
